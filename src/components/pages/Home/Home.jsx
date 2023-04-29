@@ -1,7 +1,12 @@
-import { Banner } from '../../common'
+import { Banner, Carrusel } from '../../common'
 
 function Home() {
-  return <Banner />
+  return (
+    <>
+      <Banner />
+      <Carrusel />
+    </>
+  )
 }
 
 export default Home
