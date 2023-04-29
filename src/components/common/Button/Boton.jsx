@@ -13,7 +13,10 @@ const Btn1 = styled(Button)(({ theme }) => ({
 }))
 
 function Boton({ children }) {
-  return 'Crear Video' && <Btn1 variant='contained'>{children}</Btn1>
+  const text = {
+    'Crear Video': <Btn1 variant='contained'>{children}</Btn1>,
+  }
+  return text[children]
 }
 
 Boton.propTypes = {
