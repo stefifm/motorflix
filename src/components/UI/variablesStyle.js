@@ -1,6 +1,6 @@
 export const colorPrimary = '#2A7AE4'
 
-export const colorWec = '#6BD1FF'
+export const colorWec = '#005792'
 export const colorGt = '#00C86F'
 export const colorIndyCar = '#6B5BE2'
 
