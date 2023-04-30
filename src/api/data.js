@@ -142,3 +142,27 @@ export const videos = [
     codigoSeguridad: 'indycarhindy5002023',
   },
 ]
+
+export const categorias = [
+  {
+    id: 'fiawec',
+    nombre: 'WEC',
+    descripcion: 'Campeonato Mundial de Resistencia',
+    color: '#005792',
+    codigoSeguridad: 'fiawec2023',
+  },
+  {
+    id: 'gt',
+    nombre: 'GT',
+    descripcion: 'GT World Challenge',
+    color: '#00C86F',
+    codigoSeguridad: 'gtwordlchallenge2023',
+  },
+  {
+    id: 'indycar',
+    nombre: 'IndyCar',
+    descripcion: 'Todo lo relacionado a la IndyCar',
+    color: '#6B5BE2',
+    codigoSeguridad: 'indycar2023',
+  },
+]
