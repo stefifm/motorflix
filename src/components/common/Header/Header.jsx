@@ -1,6 +1,7 @@
-import { AppBar, Button, MenuList, Toolbar } from '@mui/material'
+import { Link } from 'react-router-dom'
+import { AppBar, MenuList, Toolbar } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { colorGray, colorGrayMedium, colorBlackLight, colorWhite } from '../../UI/variablesStyle'
+import { colorGray, colorGrayMedium, colorBlackLight } from '../../UI/variablesStyle'
 import Boton from '../Button/Boton'
 
 const HeaderBox = styled(AppBar)(({ theme }) => ({
@@ -17,25 +18,20 @@ const Navbar = styled(Toolbar)(({ theme }) => ({
   marginRight: '2rem',
 }))
 
-// const Boton = styled(Button)(({ theme }) => ({
-//   background: `${colorGray}`,
-//   color: `${colorWhite}`,
-//   '&:hover': {
-//     background: `${colorGrayMedium}`,
-//     color: `${colorBlackLight}`,
-//   },
-// }))
-
 function Header() {
   return (
     <HeaderBox>
       <Navbar>
-        <img
-          src='/logo.png'
-          alt='Logo'
-        />
+        <Link to={'/'}>
+          <img
+            src='/logo.png'
+            alt='Logo'
+          />
+        </Link>
         <MenuList>
-          <Boton>Crear Video</Boton>
+          <Link to={'/formularios'}>
+            <Boton>Crear Video</Boton>
+          </Link>
         </MenuList>
       </Navbar>
     </HeaderBox>
