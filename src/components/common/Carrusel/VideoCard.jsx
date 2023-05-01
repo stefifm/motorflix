@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types'
-import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material'
+import ReactPlayer from 'react-player/youtube'
+import { Box, Card, CardMedia, CardContent, Typography, Modal } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { colorWhite } from '../../UI/variablesStyle.js'
+import { useState } from 'react'
 
 const VideoCardImg = styled(CardMedia)(({ theme }) => ({
   width: '100%',
@@ -23,7 +25,23 @@ const VideoCardMain = styled(Card)(({ theme }) => ({
   borderRadius: '25px',
 }))
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '60%',
+  height: '60%',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+}
+
 function VideoCard({ video, color }) {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   const VideoBox = styled(Box)(({ theme }) => ({
     margin: '0 1rem',
     border: `3px solid ${color}`,
@@ -43,7 +61,9 @@ function VideoCard({ video, color }) {
   }))
   return (
     <>
-      <VideoBox key={video.id}>
+      <VideoBox
+        key={video.id}
+        onClick={handleOpen}>
         <VideoCardMain>
           <VideoCardImg
             component='img'
@@ -56,6 +76,21 @@ function VideoCard({ video, color }) {
           </VideoCardText>
         </VideoCardMain>
       </VideoBox>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'>
+        <Box sx={style}>
+          <ReactPlayer
+            url={video.linkVideo}
+            width='100%'
+            height='100%'
+            controls
+          />
+        </Box>
+      </Modal>
     </>
   )
 }
