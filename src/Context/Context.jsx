@@ -17,7 +17,7 @@ export const VideosProvider = ({ children }) => {
     <VideosContext.Provider
       value={{
         getVideos,
-        getCategorias,
+        getCategorias
       }}>
       {children}
     </VideosContext.Provider>
@@ -25,5 +25,5 @@ export const VideosProvider = ({ children }) => {
 }
 
 VideosProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 }
