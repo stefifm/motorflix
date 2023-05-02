@@ -3,7 +3,7 @@ import {
   colorBlack,
   colorRedDark,
   fontWeightLight,
-  fontWeightNormal,
+  fontWeightNormal
 } from './components/UI/variablesStyle'
 
 import '@fontsource/roboto/300.css'
@@ -16,7 +16,7 @@ import 'slick-carousel/slick/slick-theme.css'
 export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Roboto', sans-serif;
-    background: -webkit-linear-gradient(145deg, ${colorRedDark} 20%, ${colorBlack} 70%);
+    background: linear-gradient(145deg, ${colorRedDark} 0%, ${colorBlack} 70%);
   }
 
   h1 {
