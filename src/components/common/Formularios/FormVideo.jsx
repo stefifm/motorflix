@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import { VideosContext } from '../../../Context/Context'
 import { TextField, MenuItem, FormControl, Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import Boton from '../Button/Boton'
@@ -17,9 +19,8 @@ const Form = styled(FormControl)(({ theme }) => ({
   boxSize: 'border-box',
   transition: 'all 0.2s',
   '&:hover': {
-    transform: 'scale(0.98)',
-    boxShadow: `0 0 10px 1px ${colorPrimary}`,
-    border: `1px solid ${colorPrimary}`
+    boxShadow: `0 0 20px 1px ${colorPrimary}`,
+    border: `2px solid ${colorPrimary}`
   }
 }))
 
@@ -52,7 +53,7 @@ const ButtonRight = styled(Box)(({ theme }) => ({
 }))
 
 function FormVideo() {
-  const categorias = ['Categoria 1', 'Categoria 2', 'Categoria 3']
+  const { categorias } = useContext(VideosContext)
   return (
     <Form>
       <Titulo
@@ -87,9 +88,14 @@ function FormVideo() {
         margin='normal'
         fullWidth
         name='categoria'
+        defaultValue=''
         select>
-        {categorias.map((categoria, index) => (
-          <MenuItem key={index}>{categoria}</MenuItem>
+        {categorias?.map((categoria) => (
+          <MenuItem
+            key={categoria.id}
+            value={categoria.nombre}>
+            {categoria.nombre}
+          </MenuItem>
         ))}
       </TextField>
       <TextField
