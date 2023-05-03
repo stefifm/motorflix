@@ -1,23 +1,28 @@
-import { createContext } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { PropTypes } from 'prop-types'
-import { categorias, videos } from '../api/data'
+import { getVideos, getCategorias } from '../api/dataDB'
 
 export const VideosContext = createContext()
 
 export const VideosProvider = ({ children }) => {
-  const getVideos = () => {
-    return videos
-  }
+  const [videos, setVideos] = useState([])
+  const [categorias, setCategorias] = useState([])
 
-  const getCategorias = () => {
-    return categorias
-  }
+  useEffect(() => {
+    async function fetchData() {
+      const videosDB = await getVideos()
+      const categoriasDB = await getCategorias()
+      setVideos(videosDB.data)
+      setCategorias(categoriasDB.data)
+    }
+    fetchData()
+  }, [])
 
   return (
     <VideosContext.Provider
       value={{
-        getVideos,
-        getCategorias
+        videos,
+        categorias
       }}>
       {children}
     </VideosContext.Provider>
