@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 import {
   colorBlack,
+  colorBlackLight,
   colorRedDark,
   fontWeightLight,
   fontWeightNormal
@@ -16,7 +17,7 @@ import 'slick-carousel/slick/slick-theme.css'
 export const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(145deg, ${colorRedDark} 0%, ${colorBlack} 70%);
+    background: linear-gradient(145deg, ${colorRedDark} 0%, ${colorBlackLight} 70%);
   }
 
   h1 {
