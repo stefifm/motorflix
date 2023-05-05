@@ -9,15 +9,28 @@ export const VideosProvider = ({ children }) => {
   const [videos, setVideos] = useState([])
   const [categorias, setCategorias] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchDataVideo = async () => {
+    try {
       const videosDB = await getVideos()
-      const categoriasDB = await getCategorias()
       setVideos(videosDB.data)
-      setCategorias(categoriasDB.data)
+    } catch (error) {
+      console.log(error)
     }
-    fetchData()
-  }, [Object.values(videos).length])
+  }
+
+  const fetchDataCategoria = async () => {
+    try {
+      const categoriasDB = await getCategorias()
+      setCategorias(categoriasDB.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchDataVideo()
+    fetchDataCategoria()
+  }, [])
 
   const initialValues1 = {
     titulo: '',
