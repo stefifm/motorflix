@@ -8,21 +8,21 @@ import { useState } from 'react'
 const VideoCardImg = styled(CardMedia)(({ theme }) => ({
   width: '100%',
   objectFit: 'cover',
-  borderRadius: '25px 25px 0 0',
+  borderRadius: '25px 25px 0 0'
 }))
 
 const VideoText1 = styled(Typography)(({ theme }) => ({
   color: `${colorWhite}`,
-  paddingBottom: '1rem',
+  paddingBottom: '1rem'
 }))
 
 const VideoText2 = styled(Typography)(({ theme }) => ({
-  color: `${colorWhite}`,
+  color: `${colorWhite}`
 }))
 
 const VideoCardMain = styled(Card)(({ theme }) => ({
   margin: '0',
-  borderRadius: '25px',
+  borderRadius: '25px'
 }))
 
 const style = {
@@ -34,7 +34,7 @@ const style = {
   height: '60%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
-  boxShadow: 24,
+  boxShadow: 24
 }
 
 function VideoCard({ video, color }) {
@@ -52,18 +52,18 @@ function VideoCard({ video, color }) {
     '&:hover': {
       cursor: 'pointer',
       boxShadow: `0 0 30px 1px ${color}`,
-      transform: 'scale(0.98)',
-    },
+      transform: 'scale(0.98)'
+    }
   }))
 
   const VideoCardText = styled(CardContent)(({ theme }) => ({
-    background: `${color}`,
+    background: `${color}`
   }))
   return (
     <>
       <VideoBox
-        key={video.id}
-        onClick={handleOpen}>
+        onClick={handleOpen}
+        key={video.id}>
         <VideoCardMain>
           <VideoCardImg
             component='img'
@@ -97,7 +97,7 @@ function VideoCard({ video, color }) {
 
 VideoCard.propTypes = {
   video: PropTypes.object.isRequired,
-  color: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired
 }
 
 export default VideoCard

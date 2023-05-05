@@ -59,7 +59,9 @@ function Boton({ children }) {
       </Btn2>
     ),
     Limpiar: <Btn3 variant='contained'>{children}</Btn3>,
-    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>
+    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>,
+    Editar: <Btn4 variant='contained'>{children}</Btn4>,
+    Eliminar: <Btn4 variant='contained'>{children}</Btn4>
   }
   return text[children]
 }

@@ -7,13 +7,13 @@ import Slider from 'react-slick'
 
 function SliderComponent() {
   const { videos, categorias } = useContext(VideosContext)
-
   const settings = {
     infinite: true,
     speed: 500,
     slidesToShow: 3,
     swipeToSlide: true
   }
+
   return (
     <>
       {videos?.length === 0 && categorias?.length === 0 ? (
