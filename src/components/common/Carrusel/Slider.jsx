@@ -16,10 +16,10 @@ function SliderComponent() {
   }
   return (
     <>
-      {videos.length === 0 && categorias.length === 0 ? (
+      {videos?.length === 0 && categorias?.length === 0 ? (
         <CircularProgress />
       ) : (
-        categorias.map((categoria) => (
+        categorias?.map((categoria) => (
           <Box
             key={categoria.id}
             sx={{ margin: '3rem' }}>
@@ -36,7 +36,7 @@ function SliderComponent() {
               {categoria.nombre}
             </Typography>
             <Slider {...settings}>
-              {videos.map(
+              {videos?.map(
                 (video) =>
                   video.categoria === categoria.nombre && (
                     <VideoCard
