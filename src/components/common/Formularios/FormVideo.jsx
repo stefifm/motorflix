@@ -1,11 +1,14 @@
 import { useContext } from 'react'
 import { VideosContext } from '../../../Context/Context'
-import { TextField, MenuItem, FormControl, Box, Typography } from '@mui/material'
+import { TextField, MenuItem, Box, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import Boton from '../Button/Boton'
 import { colorGrayMedium, colorPrimary } from '../../UI/variablesStyle'
+import { useFormik } from 'formik'
+import { createVideo } from '../../../api/dataDB'
+import { toast } from 'react-hot-toast'
 
-const Form = styled(FormControl)(({ theme }) => ({
+const Form = styled('form')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',
@@ -53,9 +56,29 @@ const ButtonRight = styled(Box)(({ theme }) => ({
 }))
 
 function FormVideo() {
-  const { categorias } = useContext(VideosContext)
+  const { categorias, initialValues1, validationSchema1, setVideos } = useContext(VideosContext)
+
+  const createVideoToServer = async (values) => {
+    try {
+      const res = await createVideo(values)
+      toast.success('Video creado correctamente')
+      setVideos((prevVideos) => [...prevVideos, res.data])
+    } catch (error) {
+      console.log(error)
+      toast.error('Error al crear el video')
+    }
+  }
+
+  const formik = useFormik({
+    initialValues: initialValues1,
+    validationSchema: validationSchema1,
+    onSubmit: (values) => {
+      createVideoToServer(values)
+    }
+  })
+
   return (
-    <Form>
+    <Form onSubmit={formik.handleSubmit}>
       <Titulo
         variant='h4'
         component='h2'>
@@ -67,6 +90,11 @@ function FormVideo() {
         margin='normal'
         fullWidth
         name='titulo'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.titulo}
+        error={!!formik.errors.titulo}
+        helperText={formik.errors.titulo}
       />
       <TextField
         label='Link del Video'
@@ -74,6 +102,11 @@ function FormVideo() {
         margin='normal'
         fullWidth
         name='linkVideo'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.linkVideo}
+        error={!!formik.errors.linkVideo}
+        helperText={formik.errors.linkVideo}
       />
       <TextField
         label='Link de la Imagen'
@@ -81,6 +114,11 @@ function FormVideo() {
         margin='normal'
         fullWidth
         name='linkImage'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.linkImage}
+        error={!!formik.errors.linkImage}
+        helperText={formik.errors.linkImage}
       />
       <TextField
         label='Categoría'
@@ -89,7 +127,12 @@ function FormVideo() {
         fullWidth
         name='categoria'
         defaultValue=''
-        select>
+        select
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.categoria}
+        error={!!formik.errors.categoria}
+        helperText={formik.errors.categoria}>
         {categorias?.map((categoria) => (
           <MenuItem
             key={categoria.id}
@@ -106,6 +149,11 @@ function FormVideo() {
         name='descripcion'
         multiline
         rows={4}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.descripcion}
+        error={!!formik.errors.descripcion}
+        helperText={formik.errors.descripcion}
       />
       <TextField
         label='Código de Seguridad'
@@ -113,6 +161,11 @@ function FormVideo() {
         margin='normal'
         fullWidth
         name='codigoSeguridad'
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.codigoSeguridad}
+        error={!!formik.errors.codigoSeguridad}
+        helperText={formik.errors.codigoSeguridad}
       />
       <ButtonContainer>
         <ButtonLeft>
