@@ -3,12 +3,12 @@ import banner from '../../../assets/img/banner.png'
 import { styled } from '@mui/material/styles'
 
 const BannerBox = styled(Card)(({ theme }) => ({
-  marginTop: '4.8rem',
+  marginTop: '4rem'
 }))
 
 const BannerImg = styled(CardMedia)(({ theme }) => ({
   width: '100%',
-  objectFit: 'cover',
+  objectFit: 'cover'
 }))
 
 function Banner() {
