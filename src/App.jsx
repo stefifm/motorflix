@@ -3,7 +3,8 @@ import { GlobalStyle } from './Global'
 import { Toaster } from 'react-hot-toast'
 import DefaultPage from './components/pages/DefaultPage/DefaultPage'
 import Home from './components/pages/Home/Home'
-import FormPages from './components/pages/FormPages/FormPages'
+import FormVideoPages from './components/pages/FormPages/FormVideoPages'
+import FormCategoriaPages from './components/pages/FormPages/FormCategoriaPages'
 
 function App() {
   return (
@@ -17,8 +18,12 @@ function App() {
             element={<Home />}
           />
           <Route
-            path='/formularios'
-            element={<FormPages />}
+            path='/crear-video'
+            element={<FormVideoPages />}
+          />
+          <Route
+            path='/crear-categoria'
+            element={<FormCategoriaPages />}
           />
         </Routes>
       </DefaultPage>

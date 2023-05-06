@@ -20,6 +20,7 @@ import { colorGrayMedium, colorPrimary } from '../../UI/variablesStyle'
 import { useFormik } from 'formik'
 import { createVideo, deleteVideo, getVideo, getVideos, updateVideo } from '../../../api/dataDB'
 import { toast } from 'react-hot-toast'
+import { Link } from 'react-router-dom'
 
 const Form = styled('form')(({ theme }) => ({
   display: 'flex',
@@ -260,7 +261,9 @@ function FormVideo() {
             <Boton>Limpiar</Boton>
           </ButtonLeft>
           <ButtonRight>
-            <Boton>Nueva Categoría</Boton>
+            <Link to={'/crear-categoria'}>
+              <Boton>Nueva Categoría</Boton>
+            </Link>
           </ButtonRight>
         </ButtonContainer>
       </Form>
