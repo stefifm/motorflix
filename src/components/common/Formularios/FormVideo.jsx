@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { VideosContext } from '../../../Context/Context'
 import {
   TextField,
@@ -76,35 +76,21 @@ function FormVideo() {
   const createUpdateVideo = async (values) => {
     try {
       if (item === null) {
-        const res = await createVideo(values)
+        await createVideo(values)
+        const res = await getVideos()
+        setVideos(res.data)
         toast.success('Video creado correctamente')
-        setVideos((prevVideos) => [...prevVideos, res.data])
       }
 
       if (item !== null) {
-        updateVideoToServer(item, values)
+        await updateVideo(item.id, values)
+        const res = await getVideos()
+        setVideos(res.data)
+        toast.success('Video actualizado correctamente')
       }
     } catch (error) {
       console.log(error)
-      toast.error('Error al crear el video')
-    }
-  }
-
-  const updateVideoToServer = async (item, values) => {
-    try {
-      const res = await updateVideo(item.id, values)
-      toast.success('Video actualizado correctamente')
-      const newVideos = videos.map((video) => {
-        if (video.id === res.data.id) {
-          return res.data
-        } else {
-          return video
-        }
-      })
-      setVideos(newVideos)
-    } catch (error) {
-      console.log(error)
-      toast.error('Error al actualizar el video')
+      toast.error('Error al crear o actualizar el video')
     }
   }
 
@@ -112,28 +98,15 @@ function FormVideo() {
     const row = e.target.closest('tr')
     const id = row.cells[0].textContent
     try {
-      const res = await deleteVideo(id)
+      await deleteVideo(id)
+      const res = await getVideos()
+      setVideos(res.data)
       toast.success('Video eliminado correctamente')
-      const newVideos = videos.filter((video) => video.id !== res.data.id)
-      setVideos(newVideos)
     } catch (error) {
       console.log(error)
       toast.error('Error al eliminar el video')
     }
   }
-
-  useEffect(() => {
-    const loadVideos = async () => {
-      try {
-        const res = await getVideos()
-        setVideos(res.data)
-      } catch (error) {
-        console.log(error)
-        toast.error('Error al cargar los videos')
-      }
-    }
-    loadVideos()
-  }, [videos])
 
   useEffect(() => {
     const loadVideo = async () => {

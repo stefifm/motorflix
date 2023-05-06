@@ -11,8 +11,10 @@ export const VideosProvider = ({ children }) => {
 
   const fetchDataVideo = async () => {
     try {
-      const videosDB = await getVideos()
-      setVideos(videosDB.data)
+      if (videos.length === 0) {
+        const videosDB = await getVideos()
+        setVideos(videosDB.data)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -20,8 +22,10 @@ export const VideosProvider = ({ children }) => {
 
   const fetchDataCategoria = async () => {
     try {
-      const categoriasDB = await getCategorias()
-      setCategorias(categoriasDB.data)
+      if (categorias.length === 0) {
+        const categoriasDB = await getCategorias()
+        setCategorias(categoriasDB.data)
+      }
     } catch (error) {
       console.log(error)
     }
@@ -50,6 +54,20 @@ export const VideosProvider = ({ children }) => {
     codigoSeguridad: Yup.string().required('El codigo de seguridad es obligatorio')
   })
 
+  const initialValues2 = {
+    nombre: '',
+    descripcion: '',
+    color: '',
+    codigoSeguridad: ''
+  }
+
+  const validationSchema2 = Yup.object({
+    nombre: Yup.string().required('El nombre es obligatorio'),
+    descripcion: Yup.string().required('La descripcion es obligatoria'),
+    color: Yup.string().required('El color es obligatorio'),
+    codigoSeguridad: Yup.string().required('El codigo de seguridad es obligatorio')
+  })
+
   return (
     <VideosContext.Provider
       value={{
@@ -58,7 +76,9 @@ export const VideosProvider = ({ children }) => {
         initialValues1,
         validationSchema1,
         setVideos,
-        setCategorias
+        setCategorias,
+        initialValues2,
+        validationSchema2
       }}>
       {children}
     </VideosContext.Provider>
