@@ -28,7 +28,7 @@ function SliderComponent() {
               sx={{
                 background: `${categoria.color}`,
                 marginBottom: '2rem',
-                width: '10%',
+                width: '10rem',
                 textAlign: 'center',
                 color: `${colorWhite}`,
                 padding: '1rem'
