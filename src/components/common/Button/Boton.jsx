@@ -51,6 +51,7 @@ const Btn4 = styled(Button)(({ theme }) => ({
 function Boton({ children }) {
   const text = {
     'Crear Video': <Btn1 variant='contained'>{children}</Btn1>,
+    'Crear Categoria': <Btn1 variant='contained'>{children}</Btn1>,
     Guardar: (
       <Btn2
         variant='contained'

@@ -7,7 +7,7 @@ import Boton from '../Button/Boton'
 const HeaderBox = styled(AppBar)(({ theme }) => ({
   marginBottom: '5rem',
   background: `${colorGrayMedium}`,
-  boxShadow: `inset 6px 6px 12px ${colorGray}, inset -3px -3px 12px ${colorBlackLight}`,
+  boxShadow: `inset 6px 6px 12px ${colorGray}, inset -3px -3px 12px ${colorBlackLight}`
 }))
 
 const Navbar = styled(Toolbar)(({ theme }) => ({
@@ -15,7 +15,7 @@ const Navbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   marginLeft: '2rem',
-  marginRight: '2rem',
+  marginRight: '2rem'
 }))
 
 function Header() {
@@ -28,9 +28,12 @@ function Header() {
             alt='Logo'
           />
         </Link>
-        <MenuList>
-          <Link to={'/formularios'}>
+        <MenuList sx={{ display: 'flex', gap: '0.5rem' }}>
+          <Link to={'/crear-video'}>
             <Boton>Crear Video</Boton>
+          </Link>
+          <Link to={'/crear-categoria'}>
+            <Boton>Crear Categoria</Boton>
           </Link>
         </MenuList>
       </Navbar>
