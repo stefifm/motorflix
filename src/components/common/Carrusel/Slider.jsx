@@ -10,7 +10,7 @@ function SliderComponent() {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: videos?.length >= 3 ? 3 : 1,
     swipeToSlide: true
   }
 
