@@ -1,13 +1,18 @@
 import { Link } from 'react-router-dom'
-import { AppBar, MenuList, Toolbar } from '@mui/material'
+import { AppBar, MenuList, Toolbar, useMediaQuery, useTheme } from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { colorGray, colorGrayMedium, colorBlackLight } from '../../UI/variablesStyle'
+import { colorBlack } from '../../UI/variablesStyle'
 import Boton from '../Button/Boton'
+import DrawerComponent from './DrawerComponent'
 
 const HeaderBox = styled(AppBar)(({ theme }) => ({
-  marginBottom: '5rem',
-  background: `${colorGrayMedium}`,
-  boxShadow: `inset 6px 6px 12px ${colorGray}, inset -3px -3px 12px ${colorBlackLight}`
+  background: `${colorBlack}`,
+  opacity: '0.7'
+}))
+
+const Logo = styled('img')(({ theme }) => ({
+  width: '10rem',
+  height: 'auto'
 }))
 
 const Navbar = styled(Toolbar)(({ theme }) => ({
@@ -15,27 +20,47 @@ const Navbar = styled(Toolbar)(({ theme }) => ({
   justifyContent: 'space-between',
   alignItems: 'center',
   marginLeft: '2rem',
-  marginRight: '2rem'
+  marginRight: '2rem',
+  [theme.breakpoints.down('md')]: {
+    justifyContent: 'flex-start',
+    marginLeft: '0.5rem',
+    marginRight: '0.5rem'
+  }
+}))
+
+const ListMenu = styled(MenuList)(({ theme }) => ({
+  display: 'flex',
+  gap: '0.8rem'
 }))
 
 function Header() {
+  const theme = useTheme()
+  const isMatch = useMediaQuery(theme.breakpoints.down('md'))
   return (
     <HeaderBox>
       <Navbar>
         <Link to={'/'}>
-          <img
+          <Logo
             src='/logo.png'
             alt='Logo'
           />
         </Link>
-        <MenuList sx={{ display: 'flex', gap: '0.5rem' }}>
-          <Link to={'/crear-video'}>
-            <Boton>Crear Video</Boton>
-          </Link>
-          <Link to={'/crear-categoria'}>
-            <Boton>Crear Categoria</Boton>
-          </Link>
-        </MenuList>
+        {isMatch ? (
+          <>
+            <DrawerComponent />
+          </>
+        ) : (
+          <>
+            <ListMenu>
+              <Link to={'/crear-video'}>
+                <Boton>Crear Video</Boton>
+              </Link>
+              <Link to={'/crear-categoria'}>
+                <Boton>Crear Categoria</Boton>
+              </Link>
+            </ListMenu>
+          </>
+        )}
       </Navbar>
     </HeaderBox>
   )
