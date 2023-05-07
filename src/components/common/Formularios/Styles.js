@@ -90,13 +90,20 @@ const ButtonRight = styled(Box)(({ theme }) => ({
 }))
 
 const TableMainContainer = styled(TableContainer)(({ theme }) => ({
-  width: '90vw',
-  margin: '2rem auto',
+  width: '80vw',
+  margin: '0 auto',
   border: `3px solid ${colorWec}`
 }))
 
 const TableMain = styled(Table)(({ theme }) => ({
-  maxWidth: '100%'
+  width: '100%',
+  boxSizing: 'border-box',
+  margin: '0 auto',
+  padding: '0 4rem'
+}))
+
+const Head = styled(TableHead)(({ theme }) => ({
+  width: '100%'
 }))
 
 const TableCellHeader = styled(TableCell)(({ theme }) => ({
@@ -117,9 +124,7 @@ const TableRowStyled = styled(TableRow)(({ theme }) => ({
 
 const TableCellBody = styled(TableCell)(({ theme }) => ({
   color: `${colorBlack}`,
-  '&:nth-of-type(3)': {
-    width: '5%'
-  }
+  borderRight: `1px solid ${colorBlackLighter}`
 }))
 
 export {
@@ -132,5 +137,6 @@ export {
   TableMain,
   TableCellHeader,
   TableRowStyled,
-  TableCellBody
+  TableCellBody,
+  Head
 }
