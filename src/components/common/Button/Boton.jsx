@@ -48,7 +48,7 @@ const Btn4 = styled(Button)(({ theme }) => ({
   }
 }))
 
-function Boton({ children }) {
+function Boton({ children, onClick }) {
   const text = {
     'Crear Video': <Btn1 variant='contained'>{children}</Btn1>,
     'Crear Categoria': <Btn1 variant='contained'>{children}</Btn1>,
@@ -59,10 +59,14 @@ function Boton({ children }) {
         {children}
       </Btn2>
     ),
-    Limpiar: <Btn3 variant='contained'>{children}</Btn3>,
-    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>,
-    Editar: <Btn4 variant='contained'>{children}</Btn4>,
-    Eliminar: <Btn4 variant='contained'>{children}</Btn4>
+    Limpiar: (
+      <Btn3
+        onClick={onClick}
+        variant='contained'>
+        {children}
+      </Btn3>
+    ),
+    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>
   }
   return text[children]
 }
