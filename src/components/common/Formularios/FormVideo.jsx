@@ -1,73 +1,24 @@
 import { useContext, useEffect, useState } from 'react'
 import { VideosContext } from '../../../Context/Context'
-import {
-  TextField,
-  MenuItem,
-  Box,
-  Typography,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
-  Button
-} from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { TextField, MenuItem, TableHead, TableRow, TableBody, Paper, Button } from '@mui/material'
 import Boton from '../Button/Boton'
-import { colorGrayMedium, colorPrimary } from '../../UI/variablesStyle'
 import { useFormik } from 'formik'
 import { createVideo, deleteVideo, getVideo, getVideos, updateVideo } from '../../../api/dataDB'
 import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-
-const Form = styled('form')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '45vw',
-  height: '80vh',
-  backgroundColor: `${colorGrayMedium}`,
-  padding: '2rem',
-  borderRadius: '1rem',
-  margin: '10rem auto',
-  boxSize: 'border-box',
-  transition: 'all 0.2s',
-  '&:hover': {
-    boxShadow: `0 0 20px 1px ${colorPrimary}`,
-    border: `2px solid ${colorPrimary}`
-  }
-}))
-
-const Titulo = styled(Typography)(({ theme }) => ({
-  paddingBottom: '1rem'
-}))
-
-const ButtonContainer = styled(Box)(({ theme }) => ({
-  width: '100%',
-  marginTop: '2rem',
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  gap: '1rem'
-}))
-
-const ButtonLeft = styled(Box)(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  gap: '1rem',
-  justifyContent: 'flex-start',
-  alignItems: 'center'
-}))
-
-const ButtonRight = styled(Box)(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'flex-end',
-  alignItems: 'center'
-}))
+import { Delete, Edit } from '@mui/icons-material'
+import {
+  ButtonContainer,
+  ButtonLeft,
+  ButtonRight,
+  Form,
+  TableCellBody,
+  TableCellHeader,
+  TableMain,
+  TableMainContainer,
+  TableRowStyled,
+  Titulo
+} from './Styles'
 
 function FormVideo() {
   const [item, setItem] = useState(null)
@@ -258,7 +209,7 @@ function FormVideo() {
         <ButtonContainer>
           <ButtonLeft>
             <Boton>Guardar</Boton>
-            <Boton>Limpiar</Boton>
+            <Boton onClick={() => formik.resetForm()}>Limpiar</Boton>
           </ButtonLeft>
           <ButtonRight>
             <Link to={'/crear-categoria'}>
@@ -268,39 +219,46 @@ function FormVideo() {
         </ButtonContainer>
       </Form>
 
-      <TableContainer
-        component={Paper}
-        sx={{ width: '95vw', margin: '5rem auto' }}>
-        <Table
-          sx={{ width: '100%', boxSizing: 'border-box', margin: '5rem auto', padding: '0 4rem' }}>
+      <TableMainContainer component={Paper}>
+        <TableMain>
           <TableHead sx={{ width: '100%' }}>
             <TableRow>
               {headerTable.map((header, index) => (
-                <TableCell key={index}>{header}</TableCell>
+                <TableCellHeader
+                  align='center'
+                  key={index}>
+                  {header}
+                </TableCellHeader>
               ))}
             </TableRow>
           </TableHead>
           <TableBody>
             {videos?.map((video) => (
-              <TableRow key={video.id}>
-                <TableCell>{video.id}</TableCell>
-                <TableCell>{video.titulo}</TableCell>
-                <TableCell>{video.linkVideo}</TableCell>
-                <TableCell>{video.linkImage}</TableCell>
-                <TableCell>{video.categoria}</TableCell>
-                <TableCell>{video.descripcion}</TableCell>
-                <TableCell>{video.codigoSeguridad}</TableCell>
-                <TableCell>
-                  <Button onClick={handleRowClick}>Editar</Button>
-                </TableCell>
-                <TableCell>
-                  <Button onClick={handleDelete}>Eliminar</Button>
-                </TableCell>
-              </TableRow>
+              <TableRowStyled key={video.id}>
+                <TableCellBody align='center'>{video.id}</TableCellBody>
+                <TableCellBody align='center'>{video.titulo}</TableCellBody>
+                <TableCellBody align='center'>{video.linkVideo}</TableCellBody>
+                <TableCellBody align='center'>{video.linkImage}</TableCellBody>
+                <TableCellBody align='center'>{video.categoria}</TableCellBody>
+                <TableCellBody align='center'>{video.descripcion}</TableCellBody>
+                <TableCellBody align='center'>{video.codigoSeguridad}</TableCellBody>
+                <TableCellBody>
+                  <Button onClick={handleRowClick}>
+                    <Edit />
+                  </Button>
+                </TableCellBody>
+                <TableCellBody>
+                  <Button
+                    onClick={handleDelete}
+                    color='error'>
+                    <Delete />
+                  </Button>
+                </TableCellBody>
+              </TableRowStyled>
             ))}
           </TableBody>
-        </Table>
-      </TableContainer>
+        </TableMain>
+      </TableMainContainer>
     </>
   )
 }
