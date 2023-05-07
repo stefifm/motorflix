@@ -21,7 +21,8 @@ const VideoText2 = styled(Typography)(({ theme }) => ({
 }))
 
 const VideoCardMain = styled(Card)(({ theme }) => ({
-  margin: '0',
+  margin: '0 auto',
+  width: '100%',
   borderRadius: '25px'
 }))
 
@@ -43,12 +44,13 @@ function VideoCard({ video, color }) {
   const handleClose = () => setOpen(false)
 
   const VideoBox = styled(Box)(({ theme }) => ({
-    margin: '0 1rem',
     border: `3px solid ${color}`,
-    width: '30rem',
+    margin: '0 1rem',
+    height: '100%',
     borderRadius: '30px',
     boxSizing: 'border-box',
     transition: 'all 0.3s ease-in-out',
+
     '&:hover': {
       cursor: 'pointer',
       boxShadow: `0 0 30px 1px ${color}`,

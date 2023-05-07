@@ -3,8 +3,8 @@ import { styled } from '@mui/material/styles'
 import SliderComponent from './Slider'
 
 const BoxCarrusel = styled(Box)(({ theme }) => ({
-  margin: '2rem 5rem',
-  padding: '1rem',
+  margin: '2rem 3rem',
+  padding: '1rem'
 }))
 
 function Carrusel() {
