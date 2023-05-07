@@ -15,6 +15,7 @@ export const colorGrayMedium = '#E5E5E5'
 
 export const colorRed = '#C62828'
 export const colorRedDark = '#BE3144'
+export const colorPink = '#FCE7E7'
 
 export const fontWeightNormal = '400'
 export const fontWeightLight = '300'

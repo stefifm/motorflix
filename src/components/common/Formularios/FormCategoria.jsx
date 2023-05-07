@@ -26,6 +26,7 @@ import Boton from '../Button/Boton'
 import { colorGrayMedium, colorPrimary } from '../../UI/variablesStyle'
 import { useFormik } from 'formik'
 import { toast } from 'react-hot-toast'
+import { Delete, Edit } from '@mui/icons-material'
 
 const Form = styled('form')(({ theme }) => ({
   display: 'flex',
@@ -239,10 +240,16 @@ function FormCategoria() {
                 <TableCell>{categoria.color}</TableCell>
                 <TableCell>{categoria.codigoSeguridad}</TableCell>
                 <TableCell>
-                  <Button onClick={handleRowClick}>Editar</Button>
+                  <Button onClick={handleRowClick}>
+                    <Edit />
+                  </Button>
                 </TableCell>
                 <TableCell>
-                  <Button onClick={handleDelete}>Eliminar</Button>
+                  <Button
+                    onClick={handleDelete}
+                    color='error'>
+                    <Delete />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
