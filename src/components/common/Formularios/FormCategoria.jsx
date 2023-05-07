@@ -1,76 +1,37 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { VideosContext } from '../../../Context/Context'
-import {
-  createCategoria,
-  getCategoria,
-  getCategorias,
-  updateCategoria,
-  deleteCategoria
-} from '../../../api/dataDB'
-import {
-  TextField,
-  MenuItem,
-  Box,
-  Typography,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
-  Button
-} from '@mui/material'
-import { styled } from '@mui/material/styles'
+import { getCategoria } from '../../../api/dataDB'
+import { TextField, TableRow, TableBody, Paper, Button } from '@mui/material'
+
 import Boton from '../Button/Boton'
-import { colorGrayMedium, colorPrimary } from '../../UI/variablesStyle'
+
 import { useFormik } from 'formik'
 import { toast } from 'react-hot-toast'
 import { Delete, Edit } from '@mui/icons-material'
-
-const Form = styled('form')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  width: '45vw',
-  height: '80vh',
-  backgroundColor: `${colorGrayMedium}`,
-  padding: '2rem',
-  borderRadius: '1rem',
-  margin: '10rem auto',
-  boxSize: 'border-box',
-  transition: 'all 0.2s',
-  '&:hover': {
-    boxShadow: `0 0 20px 1px ${colorPrimary}`,
-    border: `2px solid ${colorPrimary}`
-  }
-}))
-
-const Titulo = styled(Typography)(({ theme }) => ({
-  paddingBottom: '1rem'
-}))
-
-const ButtonContainer = styled(Box)(({ theme }) => ({
-  width: '100%',
-  marginTop: '2rem',
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'center',
-  gap: '1rem'
-}))
-
-const ButtonLeft = styled(Box)(({ theme }) => ({
-  width: '100%',
-  display: 'flex',
-  gap: '1rem',
-  justifyContent: 'flex-start',
-  alignItems: 'center'
-}))
+import {
+  ButtonContainer,
+  ButtonLeft,
+  Form,
+  Head,
+  TableCellBody,
+  TableCellHeader,
+  TableMain,
+  TableMainContainer,
+  TableRowStyled,
+  Titulo
+} from './Styles'
 
 function FormCategoria() {
-  const [item, setItem] = useState(null)
-  const { categorias, setCategorias, initialValues2, validationSchema2 } = useContext(VideosContext)
+  const {
+    categorias,
+    initialValues2,
+    validationSchema2,
+    createUpdateCategoria,
+    itemCat,
+    setItemCat,
+    handleDeleteCategoria
+  } = useContext(VideosContext)
+
   const headerTable = [
     'ID',
     'Nombre',
@@ -80,23 +41,6 @@ function FormCategoria() {
     'Editar',
     'Eliminar'
   ]
-
-  const createUpdateCategoria = async (values) => {
-    if (item === null) {
-      await createCategoria(values)
-      const res = await getCategorias()
-      setCategorias(res.data)
-      toast.success('Categoría creada')
-      return
-    }
-
-    if (item !== null) {
-      await updateCategoria(item.id, values)
-      const res = await getCategorias()
-      setCategorias(res.data)
-      toast.success('Categoría actualizada')
-    }
-  }
 
   const formik = useFormik({
     initialValues: initialValues2,
@@ -109,8 +53,8 @@ function FormCategoria() {
   useEffect(() => {
     const getCategoriaById = async () => {
       try {
-        if (item !== null) {
-          const res = await getCategoria(item.id)
+        if (itemCat !== null) {
+          const res = await getCategoria(itemCat.id)
           formik.setValues(res.data)
         }
       } catch (error) {
@@ -120,21 +64,7 @@ function FormCategoria() {
     }
 
     getCategoriaById()
-  }, [item])
-
-  const handleDelete = async (e) => {
-    const row = e.target.closest('tr')
-    const id = row.cells[0].textContent
-    try {
-      await deleteCategoria(id)
-      const res = await getCategorias()
-      setCategorias(res.data)
-      toast.success('Categoría eliminada')
-    } catch (error) {
-      console.log(error)
-      toast.error('Error al eliminar categoría')
-    }
-  }
+  }, [itemCat])
 
   const handleRowClick = (e) => {
     const row = e.target.closest('tr')
@@ -143,7 +73,7 @@ function FormCategoria() {
     const descripcion = row.cells[2].textContent
     const color = row.cells[3].textContent
     const codigoSeguridad = row.cells[4].textContent
-    setItem({
+    setItemCat({
       id,
       nombre,
       descripcion,
@@ -214,48 +144,49 @@ function FormCategoria() {
         <ButtonContainer>
           <ButtonLeft>
             <Boton>Guardar</Boton>
-            <Boton>Limpiar</Boton>
+            <Boton onClick={() => formik.resetForm()}>Limpiar</Boton>
           </ButtonLeft>
         </ButtonContainer>
       </Form>
 
-      <TableContainer
-        component={Paper}
-        sx={{ width: '95vw', margin: '5rem auto' }}>
-        <Table
-          sx={{ width: '100%', boxSizing: 'border-box', margin: '5rem auto', padding: '0 4rem' }}>
-          <TableHead sx={{ width: '100%' }}>
+      <TableMainContainer component={Paper}>
+        <TableMain>
+          <Head>
             <TableRow>
               {headerTable.map((header, index) => (
-                <TableCell key={index}>{header}</TableCell>
+                <TableCellHeader
+                  align='center'
+                  key={index}>
+                  {header}
+                </TableCellHeader>
               ))}
             </TableRow>
-          </TableHead>
+          </Head>
           <TableBody>
             {categorias?.map((categoria) => (
-              <TableRow key={categoria.id}>
-                <TableCell>{categoria.id}</TableCell>
-                <TableCell>{categoria.nombre}</TableCell>
-                <TableCell>{categoria.descripcion}</TableCell>
-                <TableCell>{categoria.color}</TableCell>
-                <TableCell>{categoria.codigoSeguridad}</TableCell>
-                <TableCell>
+              <TableRowStyled key={categoria.id}>
+                <TableCellBody align='center'>{categoria.id}</TableCellBody>
+                <TableCellBody align='center'>{categoria.nombre}</TableCellBody>
+                <TableCellBody align='center'>{categoria.descripcion}</TableCellBody>
+                <TableCellBody align='center'>{categoria.color}</TableCellBody>
+                <TableCellBody align='center'>{categoria.codigoSeguridad}</TableCellBody>
+                <TableCellBody align='center'>
                   <Button onClick={handleRowClick}>
                     <Edit />
                   </Button>
-                </TableCell>
-                <TableCell>
+                </TableCellBody>
+                <TableCellBody align='center'>
                   <Button
-                    onClick={handleDelete}
+                    onClick={handleDeleteCategoria}
                     color='error'>
                     <Delete />
                   </Button>
-                </TableCell>
-              </TableRow>
+                </TableCellBody>
+              </TableRowStyled>
             ))}
           </TableBody>
-        </Table>
-      </TableContainer>
+        </TableMain>
+      </TableMainContainer>
     </>
   )
 }

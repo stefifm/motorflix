@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { VideosContext } from '../../../Context/Context'
-import { TextField, MenuItem, TableHead, TableRow, TableBody, Paper, Button } from '@mui/material'
+import { TextField, MenuItem, TableRow, TableBody, Paper, Button } from '@mui/material'
 import Boton from '../Button/Boton'
 import { useFormik } from 'formik'
-import { createVideo, deleteVideo, getVideo, getVideos, updateVideo } from '../../../api/dataDB'
+import { getVideo } from '../../../api/dataDB'
 import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
 import { Delete, Edit } from '@mui/icons-material'
@@ -12,6 +12,7 @@ import {
   ButtonLeft,
   ButtonRight,
   Form,
+  Head,
   TableCellBody,
   TableCellHeader,
   TableMain,
@@ -21,44 +22,16 @@ import {
 } from './Styles'
 
 function FormVideo() {
-  const [item, setItem] = useState(null)
-  const { categorias, initialValues1, validationSchema1, setVideos, videos } =
-    useContext(VideosContext)
-
-  const createUpdateVideo = async (values) => {
-    try {
-      if (item === null) {
-        await createVideo(values)
-        const res = await getVideos()
-        setVideos(res.data)
-        toast.success('Video creado correctamente')
-      }
-
-      if (item !== null) {
-        await updateVideo(item.id, values)
-        const res = await getVideos()
-        setVideos(res.data)
-        toast.success('Video actualizado correctamente')
-      }
-    } catch (error) {
-      console.log(error)
-      toast.error('Error al crear o actualizar el video')
-    }
-  }
-
-  const handleDelete = async (e) => {
-    const row = e.target.closest('tr')
-    const id = row.cells[0].textContent
-    try {
-      await deleteVideo(id)
-      const res = await getVideos()
-      setVideos(res.data)
-      toast.success('Video eliminado correctamente')
-    } catch (error) {
-      console.log(error)
-      toast.error('Error al eliminar el video')
-    }
-  }
+  const {
+    categorias,
+    initialValues1,
+    validationSchema1,
+    videos,
+    item,
+    setItem,
+    createUpdateVideo,
+    handleDelete
+  } = useContext(VideosContext)
 
   useEffect(() => {
     const loadVideo = async () => {
@@ -221,7 +194,7 @@ function FormVideo() {
 
       <TableMainContainer component={Paper}>
         <TableMain>
-          <TableHead sx={{ width: '100%' }}>
+          <Head>
             <TableRow>
               {headerTable.map((header, index) => (
                 <TableCellHeader
@@ -231,7 +204,7 @@ function FormVideo() {
                 </TableCellHeader>
               ))}
             </TableRow>
-          </TableHead>
+          </Head>
           <TableBody>
             {videos?.map((video) => (
               <TableRowStyled key={video.id}>
@@ -242,12 +215,12 @@ function FormVideo() {
                 <TableCellBody align='center'>{video.categoria}</TableCellBody>
                 <TableCellBody align='center'>{video.descripcion}</TableCellBody>
                 <TableCellBody align='center'>{video.codigoSeguridad}</TableCellBody>
-                <TableCellBody>
+                <TableCellBody align='center'>
                   <Button onClick={handleRowClick}>
                     <Edit />
                   </Button>
                 </TableCellBody>
-                <TableCellBody>
+                <TableCellBody align='center'>
                   <Button
                     onClick={handleDelete}
                     color='error'>
