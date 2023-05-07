@@ -7,45 +7,20 @@ import Slider from 'react-slick'
 
 function SliderComponent() {
   const { videos, categorias } = useContext(VideosContext)
-  const videosPerCategory = []
-  categorias?.map((categoria) => {
-    const videosPerCategoryAux = []
-    videos?.map((video) => {
-      if (video.categoria === categoria.nombre) {
-        videosPerCategoryAux.push(video)
-      }
-    })
-    videosPerCategory.push(videosPerCategoryAux)
-  })
-
-  const lengthPerCategory = []
-  videosPerCategory?.map((videos) => {
-    lengthPerCategory.push(videos.length)
-  })
-
-  const perCategory = {}
-
-  categorias?.map((categoria, index) => {
-    perCategory[categoria.nombre] = lengthPerCategory[index]
-  })
-
-  const getSlidesToShow = (videoCount) => {
-    const slidesToShow = perCategory[videoCount]
-    return slidesToShow
-  }
 
   const settings = {
-    infinite: getSlidesToShow(lengthPerCategory),
+    infinite: false,
     speed: 500,
     slidesToShow: 4,
     swipeToSlide: true,
+
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           swipeToSlide: true,
-          infinite: getSlidesToShow(lengthPerCategory)
+          infinite: false
         }
       },
       {
@@ -53,7 +28,7 @@ function SliderComponent() {
         settings: {
           slidesToShow: 1,
           swipeToSlide: true,
-          infinite: getSlidesToShow(lengthPerCategory)
+          infinite: false
         }
       }
     ]

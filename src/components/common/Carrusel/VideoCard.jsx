@@ -26,17 +26,19 @@ const VideoCardMain = styled(Card)(({ theme }) => ({
   borderRadius: '25px'
 }))
 
-const style = {
-  position: 'absolute',
+const BoxModal = styled(Box)(({ theme }) => ({
+  position: 'relative',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '60%',
-  height: '60%',
+  paddingTop: '37.39%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
-  boxShadow: 24
-}
+  boxShadow: 24,
+  [theme.breakpoints.down('md')]: {
+    paddingTop: '56.25%'
+  }
+}))
 
 function VideoCard({ video, color }) {
   const [open, setOpen] = useState(false)
@@ -84,14 +86,15 @@ function VideoCard({ video, color }) {
         onClose={handleClose}
         aria-labelledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
-        <Box sx={style}>
+        <BoxModal>
           <ReactPlayer
             url={video.linkVideo}
             width='100%'
             height='100%'
+            style={{ position: 'absolute', top: '0', left: '0' }}
             controls
           />
-        </Box>
+        </BoxModal>
       </Modal>
     </>
   )
