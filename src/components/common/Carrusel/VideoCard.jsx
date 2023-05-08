@@ -17,12 +17,14 @@ const VideoText1 = styled(Typography)(({ theme }) => ({
 }))
 
 const VideoText2 = styled(Typography)(({ theme }) => ({
-  color: `${colorWhite}`
+  color: `${colorWhite}`,
+  lineHeight: '1.5rem'
 }))
 
 const VideoCardMain = styled(Card)(({ theme }) => ({
   margin: '0 auto',
   width: '100%',
+  height: '100%',
   borderRadius: '25px'
 }))
 
@@ -48,7 +50,7 @@ function VideoCard({ video, color }) {
   const VideoBox = styled(Box)(({ theme }) => ({
     border: `3px solid ${color}`,
     margin: '0 1rem',
-    height: '100%',
+
     borderRadius: '30px',
     boxSizing: 'border-box',
     transition: 'all 0.3s ease-in-out',
@@ -61,7 +63,8 @@ function VideoCard({ video, color }) {
   }))
 
   const VideoCardText = styled(CardContent)(({ theme }) => ({
-    background: `${color}`
+    background: `${color}`,
+    height: '100%'
   }))
   return (
     <>

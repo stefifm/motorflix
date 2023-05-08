@@ -45,13 +45,11 @@ const VideosStyled = styled(Typography)(({ theme }) => ({
   color: `${colorWhite}`,
   textTransform: 'uppercase',
   fontWeight: 'bold',
-  paddingLeft: '0.5rem',
-  paddingRight: '0.5rem',
+  padding: '0.4rem 1rem',
   marginRight: 'auto',
-  transition: 'all 0.3s ease',
+  transition: 'all 0.4s ease',
   '&:hover': {
-    background: `${colorWhite}`,
-    color: `${colorBlack}`
+    borderBottom: `2px solid ${colorWhite}`
   }
 }))
 
@@ -78,11 +76,7 @@ function Header() {
                 <Link
                   to={'/videos'}
                   style={{ textDecoration: 'none' }}>
-                  <VideosStyled
-                    variant='p'
-                    component='h4'>
-                    Videos
-                  </VideosStyled>
+                  <VideosStyled variant='p'>Videos</VideosStyled>
                 </Link>
               </MenuItem>
               <MenuItem>

@@ -11,6 +11,7 @@ import { Delete, Edit } from '@mui/icons-material'
 import {
   ButtonContainer,
   ButtonLeft,
+  ButtonRight,
   Form,
   Head,
   TableCellBody,
@@ -20,6 +21,7 @@ import {
   TableRowStyled,
   Titulo
 } from './Styles'
+import { Link } from 'react-router-dom'
 
 function FormCategoria() {
   const {
@@ -82,6 +84,10 @@ function FormCategoria() {
     })
   }
 
+  const handleClickForm = () => {
+    setItemCat(null)
+    formik.resetForm()
+  }
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -97,7 +103,6 @@ function FormCategoria() {
           fullWidth
           name='nombre'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.nombre}
           error={!!formik.errors.nombre}
           helperText={formik.errors.nombre}
@@ -111,7 +116,6 @@ function FormCategoria() {
           multiline
           rows={4}
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.descripcion}
           error={!!formik.errors.descripcion}
           helperText={formik.errors.descripcion}
@@ -124,7 +128,6 @@ function FormCategoria() {
           name='color'
           type='color'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.color}
           error={!!formik.errors.color}
           helperText={formik.errors.color}
@@ -136,7 +139,6 @@ function FormCategoria() {
           fullWidth
           name='codigoSeguridad'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.codigoSeguridad}
           error={!!formik.errors.codigoSeguridad}
           helperText={formik.errors.codigoSeguridad}
@@ -144,8 +146,13 @@ function FormCategoria() {
         <ButtonContainer>
           <ButtonLeft>
             <Boton>Guardar</Boton>
-            <Boton onClick={() => formik.resetForm()}>Limpiar</Boton>
+            <Boton onClick={handleClickForm}>Limpiar</Boton>
           </ButtonLeft>
+          <ButtonRight>
+            <Link to={'/crear-video'}>
+              <Boton>Nuevo Video</Boton>
+            </Link>
+          </ButtonRight>
         </ButtonContainer>
       </Form>
 

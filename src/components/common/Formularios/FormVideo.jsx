@@ -88,6 +88,11 @@ function FormVideo() {
     'Eliminar'
   ]
 
+  const handleClickForm = () => {
+    formik.resetForm()
+    setItem(null)
+  }
+
   return (
     <>
       <Form onSubmit={formik.handleSubmit}>
@@ -103,7 +108,6 @@ function FormVideo() {
           fullWidth
           name='titulo'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.titulo}
           error={!!formik.errors.titulo}
           helperText={formik.errors.titulo}
@@ -115,7 +119,6 @@ function FormVideo() {
           fullWidth
           name='linkVideo'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.linkVideo}
           error={!!formik.errors.linkVideo}
           helperText={formik.errors.linkVideo}
@@ -127,7 +130,6 @@ function FormVideo() {
           fullWidth
           name='linkImage'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.linkImage}
           error={!!formik.errors.linkImage}
           helperText={formik.errors.linkImage}
@@ -141,7 +143,6 @@ function FormVideo() {
           defaultValue=''
           select
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.categoria}
           error={!!formik.errors.categoria}
           helperText={formik.errors.categoria}>
@@ -162,7 +163,6 @@ function FormVideo() {
           multiline
           rows={4}
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.descripcion}
           error={!!formik.errors.descripcion}
           helperText={formik.errors.descripcion}
@@ -174,7 +174,6 @@ function FormVideo() {
           fullWidth
           name='codigoSeguridad'
           onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
           value={formik.values.codigoSeguridad}
           error={!!formik.errors.codigoSeguridad}
           helperText={formik.errors.codigoSeguridad}
@@ -182,7 +181,7 @@ function FormVideo() {
         <ButtonContainer>
           <ButtonLeft>
             <Boton>Guardar</Boton>
-            <Boton onClick={() => formik.resetForm()}>Limpiar</Boton>
+            <Boton onClick={handleClickForm}>Limpiar</Boton>
           </ButtonLeft>
           <ButtonRight>
             <Link to={'/crear-categoria'}>

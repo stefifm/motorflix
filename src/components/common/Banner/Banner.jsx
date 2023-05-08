@@ -4,6 +4,7 @@ import { Box, Button, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import ReactPlayer from 'react-player/youtube'
 import { colorWhite } from '../../UI/variablesStyle'
+import Boton from '../Button/Boton'
 
 const Section = styled('section')(({ theme }) => ({
   marginTop: '4rem',
@@ -62,12 +63,7 @@ function Banner() {
               alt='Logo'
             />
           </Titulo>
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={handleScroll}>
-            Para Ver Más
-          </Button>
+          <Boton onClick={handleScroll}>Para Ver Más</Boton>
         </BoxContainer>
       </Div>
     </Section>

@@ -6,16 +6,21 @@ import {
   colorGray,
   colorGrayMedium,
   colorWhite,
-  colorPrimary
+  colorPrimary,
+  colorRed,
+  colorWec,
+  colorBlack
 } from '../../UI/variablesStyle'
 
 const Btn1 = styled(Button)(({ theme }) => ({
-  background: `${colorGray}`,
+  background: `${colorBlack}`,
   color: `${colorWhite}`,
-  transition: 'all 1s ease-in-out',
+  transition: 'all 0.4s ease-in-out',
+  border: `1px solid ${colorWhite}`,
   '&:hover': {
     background: `${colorGrayMedium}`,
-    color: `${colorBlackLight}`
+    color: `${colorBlackLight}`,
+    border: `1px solid ${colorBlackLight}`
   }
 }))
 const Btn2 = styled(Button)(({ theme }) => ({
@@ -30,21 +35,21 @@ const Btn2 = styled(Button)(({ theme }) => ({
   }
 }))
 const Btn3 = styled(Button)(({ theme }) => ({
-  background: `${colorGray}`,
+  background: `${colorRed}`,
   color: `${colorWhite}`,
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
-    background: `${colorGrayMedium}`,
-    color: `${colorBlackLight}`
+    background: `${colorWhite}`,
+    color: `${colorRed}`
   }
 }))
 const Btn4 = styled(Button)(({ theme }) => ({
-  background: `${colorGray}`,
+  background: `${colorWec}`,
   color: `${colorWhite}`,
   transition: 'all 0.3s ease-in-out',
   '&:hover': {
-    background: `${colorGrayMedium}`,
-    color: `${colorBlackLight}`
+    background: `${colorWhite}`,
+    color: `${colorWec}`
   }
 }))
 
@@ -59,6 +64,13 @@ function Boton({ children, onClick }) {
         {children}
       </Btn2>
     ),
+    Buscar: (
+      <Btn2
+        variant='contained'
+        type='submit'>
+        {children}
+      </Btn2>
+    ),
     Limpiar: (
       <Btn3
         onClick={onClick}
@@ -66,7 +78,16 @@ function Boton({ children, onClick }) {
         {children}
       </Btn3>
     ),
-    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>
+    'Nueva Categoría': <Btn4 variant='contained'>{children}</Btn4>,
+    'Nuevo Video': <Btn4 variant='contained'>{children}</Btn4>,
+    'Para Ver Más': (
+      <Btn2
+        variant='contained'
+        type='submit'
+        onClick={onClick}>
+        {children}
+      </Btn2>
+    )
   }
   return text[children]
 }

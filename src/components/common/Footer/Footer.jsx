@@ -1,17 +1,24 @@
-import { Card, CardMedia, Typography } from '@mui/material'
+import { Box, Card, CardMedia, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { colorBlack, colorWhite } from '../../UI/variablesStyle'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import LinkedInIcon from '@mui/icons-material/LinkedIn'
+import GitHubIcon from '@mui/icons-material/GitHub'
+import { Link } from 'react-router-dom'
 
 const FooterBox = styled(Card)(({ theme }) => ({
   marginTop: '5rem',
   background: `${colorBlack}`,
   width: '100%',
   display: 'flex',
-  flexDirection: 'column',
   alignItems: 'center',
-  justifyContent: 'center',
-  position: 'relative',
+  justifyContent: 'space-around',
+  padding: '1rem 0',
   bottom: '0',
+  position: 'static',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column'
+  }
 }))
 
 const FooterImg = styled(CardMedia)(({ theme }) => ({
@@ -19,22 +26,106 @@ const FooterImg = styled(CardMedia)(({ theme }) => ({
   height: '10%',
   width: '20%',
   paddingTop: '1rem',
+  [theme.breakpoints.down('md')]: {
+    width: '50%',
+    height: '40%'
+  }
 }))
 
 const FooterText = styled(Typography)(({ theme }) => ({
   color: `${colorWhite}`,
-  padding: '1rem',
+  padding: '1rem'
+}))
+
+const BoxLeft = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+  width: '25%',
+  paddingLeft: '1rem',
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    paddingLeft: '0'
+  }
+}))
+
+const Div = styled('div')(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  width: '100%'
+}))
+
+const BoxRight = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+  width: '25%',
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    alignItems: 'center'
+  }
+}))
+
+const BoxMedium = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '0.5rem',
+  width: '50%',
+  paddingBottom: '1rem',
+  [theme.breakpoints.down('sm')]: {
+    width: '100%'
+  }
 }))
 
 function Footer() {
+  const social = [
+    {
+      name: 'Twitter',
+      icon: <TwitterIcon />
+    },
+    {
+      name: 'Linkedin',
+      icon: <LinkedInIcon />
+    },
+    {
+      name: 'Github',
+      icon: <GitHubIcon />
+    }
+  ]
+
+  const links = [
+    'https://twitter.com/stefifm',
+    'https://www.linkedin.com/in/stefania-bruera',
+    'https://github.com/stefifm'
+  ]
   return (
-    <FooterBox>
-      <FooterImg
-        component='img'
-        image='/logo.png'
-      />
-      <FooterText variant='p'>© Stefania Verónica Bruera</FooterText>
-    </FooterBox>
+    <>
+      <FooterBox>
+        <BoxLeft>
+          <Div>
+            {social.map((item, index) => (
+              <Link
+                key={index}
+                to={links[index]}
+                target='_blank'
+                rel='noopener noreferrer'
+                style={{ color: `${colorWhite}` }}>
+                {item.icon}
+              </Link>
+            ))}
+          </Div>
+        </BoxLeft>
+        <BoxMedium>
+          <FooterImg
+            component='img'
+            image='/logo.png'
+          />
+        </BoxMedium>
+        <BoxRight>
+          <FooterText variant='p'>© Stefania Verónica Bruera</FooterText>
+        </BoxRight>
+      </FooterBox>
+    </>
   )
 }
 

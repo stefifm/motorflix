@@ -109,6 +109,7 @@ const Head = styled(TableHead)(({ theme }) => ({
 const TableCellHeader = styled(TableCell)(({ theme }) => ({
   backgroundColor: `${colorWec}`,
   color: `${colorWhite}`,
+  border: `1px solid ${colorWec}`,
   [`&.${tableCellClasses.root}`]: {
     fontSize: '1.2rem'
   }
@@ -124,7 +125,12 @@ const TableRowStyled = styled(TableRow)(({ theme }) => ({
 
 const TableCellBody = styled(TableCell)(({ theme }) => ({
   color: `${colorBlack}`,
-  borderRight: `1px solid ${colorBlackLighter}`
+  borderRight: `1px solid ${colorBlackLighter}`,
+  borderLeft: `1px solid ${colorBlackLighter}`,
+  borderBottom: `1px solid ${colorBlackLighter}`,
+  '&:last-child td, &:last-child th': {
+    border: 'none'
+  }
 }))
 
 export {
