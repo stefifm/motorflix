@@ -1,25 +1,76 @@
-import { Card, CardMedia } from '@mui/material'
-import banner from '../../../assets/img/banner.png'
+import { useContext } from 'react'
+import { VideosContext } from '../../../Context/Context'
+import { Box, Button, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
+import ReactPlayer from 'react-player/youtube'
+import { colorWhite } from '../../UI/variablesStyle'
 
-const BannerBox = styled(Card)(({ theme }) => ({
-  marginTop: '4rem'
+const Section = styled('section')(({ theme }) => ({
+  marginTop: '4rem',
+  width: '100%',
+  height: '80vh',
+  position: 'relative',
+  '& video': {
+    objectFit: 'cover'
+  }
 }))
 
-const BannerImg = styled(CardMedia)(({ theme }) => ({
+const Div = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  top: '0',
+  left: '0',
   width: '100%',
-  objectFit: 'cover'
+  height: '100%',
+  backgroundColor: 'rgba(0,0,0,.5)'
+}))
+
+const Titulo = styled(Typography)(({ theme }) => ({
+  paddingBottom: theme.spacing(4)
+}))
+
+const BoxContainer = styled(Box)(({ theme }) => ({
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+  color: `${colorWhite}`
 }))
 
 function Banner() {
+  const { ref } = useContext(VideosContext)
+  const handleScroll = () => {
+    ref.current.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
-    <BannerBox>
-      <BannerImg
-        component='img'
-        image={banner}
-        alt='banner'
+    <Section>
+      <ReactPlayer
+        url={'https://www.youtube.com/watch?v=qoAmVMi01hY&ab_channel=VisionMotorsport'}
+        playing
+        loop
+        muted
+        width='100%'
+        height='100%'
       />
-    </BannerBox>
+      <Div>
+        <BoxContainer>
+          <Titulo
+            variant='h3'
+            component='h1'>
+            <img
+              src='/logo.png'
+              alt='Logo'
+            />
+          </Titulo>
+          <Button
+            variant='contained'
+            color='primary'
+            onClick={handleScroll}>
+            Para Ver Más
+          </Button>
+        </BoxContainer>
+      </Div>
+    </Section>
   )
 }
 
