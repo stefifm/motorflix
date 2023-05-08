@@ -22,8 +22,8 @@ const Text = styled(ListItemText)(({ theme }) => ({
 }))
 
 function DrawerComponent() {
-  const pages = ['Crear Video', 'Crear Categoría']
-  const links = ['/crear-video', '/crear-categoria']
+  const pages = ['Videos', 'Crear Video', 'Crear Categoría']
+  const links = ['/videos', '/crear-video', '/crear-categoria']
   const [openDrawer, setOpenDrawer] = useState(false)
   return (
     <>

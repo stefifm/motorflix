@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom'
-import { AppBar, MenuList, Toolbar, useMediaQuery, useTheme } from '@mui/material'
+import {
+  AppBar,
+  MenuItem,
+  MenuList,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+  useTheme
+} from '@mui/material'
 import { styled } from '@mui/material/styles'
-import { colorBlack } from '../../UI/variablesStyle'
+import { colorBlack, colorWhite } from '../../UI/variablesStyle'
 import Boton from '../Button/Boton'
 import DrawerComponent from './DrawerComponent'
 
@@ -30,7 +38,21 @@ const Navbar = styled(Toolbar)(({ theme }) => ({
 
 const ListMenu = styled(MenuList)(({ theme }) => ({
   display: 'flex',
-  gap: '0.8rem'
+  gap: '0.5rem'
+}))
+
+const VideosStyled = styled(Typography)(({ theme }) => ({
+  color: `${colorWhite}`,
+  textTransform: 'uppercase',
+  fontWeight: 'bold',
+  paddingLeft: '0.5rem',
+  paddingRight: '0.5rem',
+  marginRight: 'auto',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    background: `${colorWhite}`,
+    color: `${colorBlack}`
+  }
 }))
 
 function Header() {
@@ -52,12 +74,27 @@ function Header() {
         ) : (
           <>
             <ListMenu>
-              <Link to={'/crear-video'}>
-                <Boton>Crear Video</Boton>
-              </Link>
-              <Link to={'/crear-categoria'}>
-                <Boton>Crear Categoria</Boton>
-              </Link>
+              <MenuItem>
+                <Link
+                  to={'/videos'}
+                  style={{ textDecoration: 'none' }}>
+                  <VideosStyled
+                    variant='p'
+                    component='h4'>
+                    Videos
+                  </VideosStyled>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={'/crear-video'}>
+                  <Boton>Crear Video</Boton>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to={'/crear-categoria'}>
+                  <Boton>Crear Categoria</Boton>
+                </Link>
+              </MenuItem>
             </ListMenu>
           </>
         )}

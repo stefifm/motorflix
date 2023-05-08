@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { VideosContext } from '../../../Context/Context.jsx'
-import { Box, CircularProgress, Typography } from '@mui/material'
+import { Box, LinearProgress, Typography } from '@mui/material'
 import { colorWhite } from '../../UI/variablesStyle.js'
 import VideoCard from './VideoCard'
 import Slider from 'react-slick'
@@ -37,7 +37,7 @@ function SliderComponent() {
   return (
     <>
       {videos?.length === 0 && categorias?.length === 0 ? (
-        <CircularProgress />
+        <LinearProgress size={50} />
       ) : (
         categorias?.map((categoria) => (
           <Box

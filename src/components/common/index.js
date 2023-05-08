@@ -6,5 +6,16 @@ import Carrusel from './Carrusel/Carrusel'
 import FormVideo from './Formularios/FormVideo'
 import FormCategoria from './Formularios/FormCategoria'
 import DrawerComponent from './Header/DrawerComponent'
+import VideoCard from './Carrusel/VideoCard'
 
-export { Banner, Header, Footer, Boton, Carrusel, FormCategoria, FormVideo, DrawerComponent }
+export {
+  Banner,
+  Header,
+  Footer,
+  Boton,
+  Carrusel,
+  FormCategoria,
+  FormVideo,
+  DrawerComponent,
+  VideoCard
+}

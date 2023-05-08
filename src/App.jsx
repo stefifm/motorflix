@@ -5,6 +5,7 @@ import DefaultPage from './components/pages/DefaultPage/DefaultPage'
 import Home from './components/pages/Home/Home'
 import FormVideoPages from './components/pages/FormPages/FormVideoPages'
 import FormCategoriaPages from './components/pages/FormPages/FormCategoriaPages'
+import VideosPages from './components/pages/VideosPages/VideosPages'
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Route
             path='/'
             element={<Home />}
+          />
+          <Route
+            path='/videos'
+            element={<VideosPages />}
           />
           <Route
             path='/crear-video'

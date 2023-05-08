@@ -31,7 +31,7 @@ const BoxModal = styled(Box)(({ theme }) => ({
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  paddingTop: '37.39%',
+  paddingTop: '42.25%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
