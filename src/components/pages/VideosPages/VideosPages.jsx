@@ -1,34 +1,58 @@
 import { useContext } from 'react'
-import { Box } from '@mui/material'
+import { Box, LinearProgress } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { VideosContext } from '../../../Context/Context'
-import { VideoCard } from '../../common'
+import { FormSearch, VideoCard } from '../../common'
 
 const BoxVideos = styled(Box)(({ theme }) => ({
   margin: '5rem auto',
-  width: '100%',
-  maxWidth: '800px',
+  width: '80%',
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))'
+  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+  gridGap: '2rem',
+  height: '100%'
 }))
 
 function VideosPages() {
-  const { videos, categorias } = useContext(VideosContext)
+  const { videos, categorias, data } = useContext(VideosContext)
+
   return (
-    <BoxVideos>
-      {videos.map((video) =>
-        categorias.map(
-          (categoria) =>
-            video.categoria === categoria.nombre && (
-              <VideoCard
-                key={video.id}
-                video={video}
-                color={categoria.color}
-              />
+    <>
+      <FormSearch />
+      <BoxVideos>
+        {videos.length === 0 ? (
+          <LinearProgress size={40} />
+        ) : data.length > 0 ? (
+          data.map((video) =>
+            categorias.map(
+              (categoria) =>
+                video.categoria === categoria.nombre && (
+                  <VideoCard
+                    key={video.id}
+                    video={video}
+                    color={categoria.color}
+                  />
+                )
             )
-        )
-      )}
-    </BoxVideos>
+          )
+        ) : (
+          <>
+            {videos.map((video) =>
+              categorias.map(
+                (categoria) =>
+                  video.categoria === categoria.nombre && (
+                    <VideoCard
+                      key={video.id}
+                      video={video}
+                      color={categoria.color}
+                    />
+                  )
+              )
+            )}
+          </>
+        )}
+      </BoxVideos>
+    </>
   )
 }
 

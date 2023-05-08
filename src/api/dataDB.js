@@ -9,6 +9,7 @@ export const createVideo = (video) => dataDB.post('/videos', video)
 export const updateVideo = (id, video) => dataDB.put(`/videos/${id}/`, video)
 export const deleteVideo = (id) => dataDB.delete(`/videos/${id}`)
 export const getVideo = (id) => dataDB.get(`/videos/${id}`)
+export const filterVideos = (search) => dataDB.get(`/videos?q=${search}`)
 
 export const getCategorias = () => dataDB.get('/categorias')
 export const getCategoria = (id) => dataDB.get(`/categorias/${id}`)

@@ -7,6 +7,7 @@ import FormVideo from './Formularios/FormVideo'
 import FormCategoria from './Formularios/FormCategoria'
 import DrawerComponent from './Header/DrawerComponent'
 import VideoCard from './Carrusel/VideoCard'
+import FormSearch from './Formularios/FormSearch'
 
 export {
   Banner,
@@ -17,5 +18,6 @@ export {
   FormCategoria,
   FormVideo,
   DrawerComponent,
-  VideoCard
+  VideoCard,
+  FormSearch
 }

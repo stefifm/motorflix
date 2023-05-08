@@ -9,7 +9,8 @@ import {
   deleteVideo,
   createCategoria,
   updateCategoria,
-  deleteCategoria
+  deleteCategoria,
+  filterVideos
 } from '../api/dataDB'
 import { toast } from 'react-hot-toast'
 
@@ -21,7 +22,10 @@ export const VideosProvider = ({ children }) => {
   const [categorias, setCategorias] = useState([])
   const [item, setItem] = useState(null)
   const [itemCat, setItemCat] = useState(null)
+  const [search, setSearch] = useState('')
+  const [data, setData] = useState([])
 
+  //  Fetch de datos
   const fetchDataVideo = async () => {
     try {
       if (videos.length === 0) {
@@ -51,6 +55,25 @@ export const VideosProvider = ({ children }) => {
     fetchDataCategoria()
   }, [])
 
+  // Búsqueda de videos
+  useEffect(() => {
+    const filterData = async () => {
+      try {
+        const res = await filterVideos(search)
+        setData(res.data)
+        if (res.data.length === 0) {
+          toast.error('No se encontraron videos')
+        }
+      } catch (error) {
+        toast.error('Sucedió un error al filtrar los videos')
+      }
+    }
+
+    search.length > 0 && filterData()
+  }, [search])
+
+  //  Validación de formulario de videos
+
   const initialValues1 = {
     titulo: '',
     linkVideo: '',
@@ -69,6 +92,8 @@ export const VideosProvider = ({ children }) => {
     codigoSeguridad: Yup.string().required('El codigo de seguridad es obligatorio')
   })
 
+  //  Validación de formulario de categorias
+
   const initialValues2 = {
     nombre: '',
     descripcion: '',
@@ -82,6 +107,8 @@ export const VideosProvider = ({ children }) => {
     color: Yup.string().required('El color es obligatorio'),
     codigoSeguridad: Yup.string().required('El codigo de seguridad es obligatorio')
   })
+
+  // Creación, actualización y eliminación de videos
 
   const createUpdateVideo = async (values) => {
     try {
@@ -175,7 +202,10 @@ export const VideosProvider = ({ children }) => {
         setItemCat,
         createUpdateCategoria,
         handleDeleteCategoria,
-        ref
+        ref,
+        search,
+        setSearch,
+        data
       }}>
       {children}
     </VideosContext.Provider>
