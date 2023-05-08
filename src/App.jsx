@@ -10,7 +10,15 @@ import VideosPages from './components/pages/VideosPages/VideosPages'
 function App() {
   return (
     <Router>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: {
+            fontSize: '1.3rem',
+            width: '100%',
+            height: '100%'
+          }
+        }}
+      />
       <GlobalStyle />
       <DefaultPage>
         <Routes>
