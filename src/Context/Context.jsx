@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
 import { PropTypes } from 'prop-types'
 import * as Yup from 'yup'
 import {
@@ -16,6 +16,7 @@ import { toast } from 'react-hot-toast'
 export const VideosContext = createContext()
 
 export const VideosProvider = ({ children }) => {
+  const ref = useRef(null)
   const [videos, setVideos] = useState([])
   const [categorias, setCategorias] = useState([])
   const [item, setItem] = useState(null)
@@ -29,6 +30,7 @@ export const VideosProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error)
+      toast.error('Hubo un error al cargar los videos')
     }
   }
 
@@ -40,6 +42,7 @@ export const VideosProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error)
+      toast.error('Hubo un error al cargar las categorias')
     }
   }
 
@@ -97,7 +100,7 @@ export const VideosProvider = ({ children }) => {
       }
     } catch (error) {
       console.log(error)
-      toast.error('Error al crear o actualizar el video')
+      toast.error('Hubo un error en la creación o actualización del video')
     }
   }
 
@@ -118,19 +121,24 @@ export const VideosProvider = ({ children }) => {
   // Categorias
 
   const createUpdateCategoria = async (values) => {
-    if (itemCat === null) {
-      await createCategoria(values)
-      const res = await getCategorias()
-      setCategorias(res.data)
-      toast.success('Categoría creada')
-      return
-    }
+    try {
+      if (itemCat === null) {
+        await createCategoria(values)
+        const res = await getCategorias()
+        setCategorias(res.data)
+        toast.success('Categoría creada')
+        return
+      }
 
-    if (itemCat !== null) {
-      await updateCategoria(itemCat.id, values)
-      const res = await getCategorias()
-      setCategorias(res.data)
-      toast.success('Categoría actualizada')
+      if (itemCat !== null) {
+        await updateCategoria(itemCat.id, values)
+        const res = await getCategorias()
+        setCategorias(res.data)
+        toast.success('Categoría actualizada')
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error('Hubo un error en la creación o actualización de la categoría')
     }
   }
 
@@ -166,7 +174,8 @@ export const VideosProvider = ({ children }) => {
         itemCat,
         setItemCat,
         createUpdateCategoria,
-        handleDeleteCategoria
+        handleDeleteCategoria,
+        ref
       }}>
       {children}
     </VideosContext.Provider>

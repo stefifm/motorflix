@@ -1,6 +1,8 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import SliderComponent from './Slider'
+import { useContext } from 'react'
+import { VideosContext } from '../../../Context/Context'
 
 const BoxCarrusel = styled(Box)(({ theme }) => ({
   margin: '2rem 3rem',
@@ -8,8 +10,11 @@ const BoxCarrusel = styled(Box)(({ theme }) => ({
 }))
 
 function Carrusel() {
+  const { ref } = useContext(VideosContext)
   return (
-    <BoxCarrusel>
+    <BoxCarrusel
+      id='section'
+      ref={ref}>
       <SliderComponent />
     </BoxCarrusel>
   )
