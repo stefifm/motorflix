@@ -1,4 +1,4 @@
-import { Box, Card, CardMedia, Typography } from '@mui/material'
+import { Box, Card, CardMedia, Paper, Typography } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { colorBlack, colorWhite } from '../../UI/variablesStyle'
 import TwitterIcon from '@mui/icons-material/Twitter'
@@ -6,16 +6,15 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { Link } from 'react-router-dom'
 
-const FooterBox = styled(Card)(({ theme }) => ({
-  marginTop: '5rem',
-  background: `${colorBlack}`,
+const FooterBox = styled(Box)(({ theme }) => ({
   width: '100%',
+  background: `${colorBlack}`,
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-around',
   padding: '1rem 0',
-  bottom: '0',
-  position: 'static',
+  flexShrink: 0,
+  marginTop: 'calc(20% + 30px)',
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column'
   }
@@ -100,7 +99,7 @@ function Footer() {
   ]
   return (
     <>
-      <FooterBox>
+      <FooterBox component='footer'>
         <BoxLeft>
           <Div>
             {social.map((item, index) => (

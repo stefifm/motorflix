@@ -121,10 +121,11 @@ function FormCategoria() {
           helperText={formik.errors.descripcion}
         />
         <TextField
-          label='Color'
           variant='outlined'
           margin='normal'
           fullWidth
+          label='Color'
+          focused
           name='color'
           type='color'
           onChange={formik.handleChange}
