@@ -16,6 +16,14 @@ function SliderComponent() {
 
     responsive: [
       {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 3,
+          swipeToSlide: true,
+          infinite: false
+        }
+      },
+      {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
