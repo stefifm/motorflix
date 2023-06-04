@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { GlobalStyle } from './Global'
 import { Toaster } from 'react-hot-toast'
 import DefaultPage from './components/pages/DefaultPage/DefaultPage'
@@ -47,6 +47,15 @@ function App() {
               <Route
                 path='/crear-categoria'
                 element={<FormCategoriaPages />}
+              />
+              <Route
+                path='*'
+                element={
+                  <Navigate
+                    to='/'
+                    replace
+                  />
+                }
               />
             </Routes>
           </DefaultPage>
