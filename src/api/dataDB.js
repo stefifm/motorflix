@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const dataDB = axios.create({
-  baseURL: 'https://motorflix-api.onrender.com/'
+  baseURL: 'https://motorflix-api.onrender.com'
 })
 
 export const getVideos = () => dataDB.get('/videos')
